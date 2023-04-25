@@ -2,41 +2,52 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Task from '../../modules/Tasks';
 import * as enums from '../../useful/enums/Tarefa';
 
+type TaskState = {
+	itens: Task[];
+};
+
+const initialState: TaskState = {
+	itens: [
+		{
+			id: Math.random() * 1000,
+			description: 'Estudar Js atraves do React e o Redux',
+			priority: enums.Priority.IMPORTANTE,
+			status: enums.Status.PENDENTE,
+			title: 'Estudar JS'
+		},
+		{
+			id: Math.random() * 1000,
+			description: 'Estudar typescript',
+			priority: enums.Priority.IMPORTANTE,
+			status: enums.Status.PENDENTE,
+			title: 'Estudar JS'
+		},
+		{
+			id: Math.random() * 1000,
+			description: 'Estudar Python',
+			priority: enums.Priority.IMPORTANTE,
+			status: enums.Status.PENDENTE,
+			title: 'Estudar Py'
+		},
+		{
+			id: Math.random() * 1000,
+			description: 'Estudar Django',
+			priority: enums.Priority.IMPORTANTE,
+			status: enums.Status.PENDENTE,
+			title: 'Estudar Py'
+		}
+	]
+};
+
 const taskSlice = createSlice({
 	name: 'tasks',
-	initialState: [
-		new Task(
-			'Estudar FrontEnd na Ebac',
-			enums.Priority.IMPORTANTE,
-			enums.Status.PENDENTE,
-			'',
-			1
-		),
-		new Task(
-			'Estudar Inglês',
-			enums.Priority.IMPORTANTE,
-			enums.Status.PENDENTE,
-			'',
-			2
-		),
-		new Task(
-			'Estudar Aulas da faculdade',
-			enums.Priority.URGENTE,
-			enums.Status.PENDENTE,
-			'Fazer as aulas de desenvolvimento mobile',
-			3
-		),
-		new Task(
-			'Ir para academia',
-			enums.Priority.IMPORTANTE,
-			enums.Status.PENDENTE,
-			'',
-			4
-		)
-	],
+	initialState,
 	reducers: {
 		removeTask: (state, action: PayloadAction<number>) => {
-			state = state.filter((task) => task.id !== action.payload);
+			state.itens = state.itens.filter(
+				(task) => task.id !== action.payload
+			);
+			console.log(state.itens);
 		}
 	}
 });

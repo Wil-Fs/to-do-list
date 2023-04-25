@@ -1,15 +1,14 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import * as S from './styles';
-import * as enums from '../../useful/enums/Tarefa';
 
-type Props = {
-	title: string;
-	priority: enums.Priority;
-	status: enums.Status;
-	description: string;
-};
+import { removeTask } from '../../store/reducers/tasks';
+import TaskClass from '../../modules/Tasks';
+type Props = TaskClass;
 
-const Task = ({ title, priority, description, status }: Props) => {
+const Task = ({ title, priority, description, status, id }: Props) => {
+	const dispatch = useDispatch();
 	const [isEditing, setIsEditing] = useState(false);
 
 	return (
@@ -37,7 +36,11 @@ const Task = ({ title, priority, description, status }: Props) => {
 						<S.Buttons onClick={() => setIsEditing(true)}>
 							Editar
 						</S.Buttons>
-						<S.RemoveCancelButton>Remover</S.RemoveCancelButton>
+						<S.RemoveCancelButton
+							onClick={() => dispatch(removeTask(id))}
+						>
+							Remover
+						</S.RemoveCancelButton>
 					</>
 				)}
 			</S.ActionBar>
