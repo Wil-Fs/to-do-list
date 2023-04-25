@@ -2,20 +2,22 @@ import styled from 'styled-components';
 
 import variables from '../../styles/variables';
 
+import * as enums from '../../useful/enums/Tarefa';
+
 type TagProps = {
-	priority?: string;
-	status?: string;
+	priority?: enums.Priority;
+	status?: enums.Status;
+	parameter: 'priority' | 'status';
 };
 
-function changeBgColor(props: TagProps): string {
-	if ('status' in props) {
-		if (props.status == 'pendente') return variables.yellow;
-		if (props.status == 'concluído') return variables.green;
-	} else if ('priority' in props) {
-		if (props.status == 'urgente') return variables.red;
-		if (props.status == 'importante') return variables.darkYellow;
+function changeBgColor({ status, parameter, priority }: TagProps): string {
+	if (parameter == 'priority') {
+		if (priority === enums.Priority.URGENTE) return variables.red;
+		if (priority === enums.Priority.IMPORTANTE) return variables.darkYellow;
+	} else {
+		if (status === enums.Status.PENDENTE) return variables.yellow;
+		if (status === enums.Status.CONCLUIDA) return variables.green;
 	}
-
 	return '#ccc';
 }
 

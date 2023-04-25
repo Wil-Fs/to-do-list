@@ -1,24 +1,25 @@
 import Task from '../../components/Task';
 import { Container } from './styles';
+import * as enums from '../../useful/enums/Tarefa';
 
 const tasks = [
 	{
 		title: 'Estudar typescript',
 		description: 'Ver aula 6, modulo 31',
-		priority: 'importante',
-		status: 'pendente'
+		priority: enums.Priority.IMPORTANTE,
+		status: enums.Status.CONCLUIDA
 	},
 	{
 		title: 'Etudar Ingles',
 		description: 'Fazer atividade 6',
-		priority: 'importante',
-		status: 'pendente'
+		priority: enums.Priority.URGENTE,
+		status: enums.Status.CONCLUIDA
 	},
 	{
 		title: 'Ver aulas da faculdade',
 		description: 'Continuar com o desenvolvimento mobile',
-		priority: 'importante',
-		status: 'pendente'
+		priority: enums.Priority.NORMAL,
+		status: enums.Status.PENDENTE
 	}
 ];
 
