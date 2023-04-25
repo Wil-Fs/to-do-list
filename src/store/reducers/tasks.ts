@@ -23,7 +23,7 @@ const taskSlice = createSlice({
 			'Estudar Aulas da faculdade',
 			enums.Priority.URGENTE,
 			enums.Status.PENDENTE,
-			'',
+			'Fazer as aulas de desenvolvimento mobile',
 			3
 		),
 		new Task(
