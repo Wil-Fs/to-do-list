@@ -18,22 +18,22 @@ const initialState: TaskState = {
 		{
 			id: Math.random() * 1000,
 			description: 'Estudar typescript',
-			priority: enums.Priority.IMPORTANTE,
-			status: enums.Status.PENDENTE,
+			priority: enums.Priority.URGENTE,
+			status: enums.Status.CONCLUIDA,
 			title: 'Estudar JS'
 		},
 		{
 			id: Math.random() * 1000,
 			description: 'Estudar Python',
-			priority: enums.Priority.IMPORTANTE,
+			priority: enums.Priority.NORMAL,
 			status: enums.Status.PENDENTE,
 			title: 'Estudar Py'
 		},
 		{
 			id: Math.random() * 1000,
 			description: 'Estudar Django',
-			priority: enums.Priority.IMPORTANTE,
-			status: enums.Status.PENDENTE,
+			priority: enums.Priority.URGENTE,
+			status: enums.Status.CONCLUIDA,
 			title: 'Estudar Py'
 		}
 	]
@@ -48,9 +48,18 @@ const taskSlice = createSlice({
 				(task) => task.id !== action.payload
 			);
 			console.log(state.itens);
+		},
+		editTask: (state, action: PayloadAction<Task>) => {
+			const taskIndex = state.itens.findIndex(
+				(t) => t.id === action.payload.id
+			);
+
+			if (taskIndex >= 0) {
+				state.itens[taskIndex] = action.payload;
+			}
 		}
 	}
 });
 
-export const { removeTask } = taskSlice.actions;
+export const { removeTask, editTask } = taskSlice.actions;
 export default taskSlice.reducer;
