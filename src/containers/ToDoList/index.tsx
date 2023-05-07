@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Task from '../../components/Task';
-import { Container } from './styles';
+import { Container, Result } from './styles';
 
 import { RootReducer } from '../../store';
 
@@ -34,31 +34,40 @@ const ToDoList = () => {
 		}
 	};
 
+	const showResults = (quantity: number) => {
+		let message = '';
+		const complement =
+			term != undefined && term.length > 0 ? `e "${term}"` : '';
+
+		if (criterion == 'all') {
+			message = `${quantity} tarefa(s) encontrada(s) como: ${
+				term != undefined && term.length > 0 ? `e "${term}"` : ''
+			}`;
+		} else {
+			message = `${quantity} tarefa(s) encontrada(s) como: "${`${criterion}=${value}`}" ${complement}`;
+		}
+
+		return message;
+	};
+
+	const task = filterTask();
+	const message = showResults(task.length);
+
 	return (
 		<Container>
-			<p>
-				2 tarefas marcadas como &quot;caregoria&quot; e &quot;{term}
-				&quot;
-			</p>
+			<Result>{message}</Result>
 			<ul>
-				<li>{term}</li>
-				<li>{criterion}</li>
-				<li>{value}</li>
-			</ul>
-			<ul>
-				{filterTask().map(
-					({ description, title, priority, status, id }) => (
-						<li key={title}>
-							<Task
-								id={id}
-								description={description}
-								title={title}
-								priority={priority}
-								status={status}
-							/>
-						</li>
-					)
-				)}
+				{task.map(({ description, title, priority, status, id }) => (
+					<li key={title}>
+						<Task
+							id={id}
+							description={description}
+							title={title}
+							priority={priority}
+							status={status}
+						/>
+					</li>
+				))}
 			</ul>
 		</Container>
 	);
