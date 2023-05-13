@@ -57,9 +57,43 @@ const taskSlice = createSlice({
 			if (taskIndex >= 0) {
 				state.itens[taskIndex] = action.payload;
 			}
+		},
+		registerTask: (state, action: PayloadAction<Omit<Task, 'id'>>) => {
+			const taskExist = state.itens.find(
+				(task) =>
+					task.title.toLowerCase() ===
+					action.payload.title.toLowerCase()
+			);
+
+			if (taskExist) {
+				alert('Tarefa já existente');
+			} else {
+				const lastTask = state.itens[state.itens.length - 1];
+
+				const newTask = {
+					...action.payload,
+					id: lastTask ? lastTask.id + 1 : 1
+				};
+				state.itens.push(newTask);
+			}
+		},
+		setStatus: (
+			state,
+			action: PayloadAction<{ id: number; finished: boolean }>
+		) => {
+			const taskIndex = state.itens.findIndex(
+				(t) => t.id === action.payload.id
+			);
+
+			if (taskIndex >= 0) {
+				state.itens[taskIndex].status = action.payload.finished
+					? enums.Status.CONCLUIDA
+					: enums.Status.PENDENTE;
+			}
 		}
 	}
 });
 
-export const { removeTask, editTask } = taskSlice.actions;
+export const { removeTask, editTask, registerTask, setStatus } =
+	taskSlice.actions;
 export default taskSlice.reducer;

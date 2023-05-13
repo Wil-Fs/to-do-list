@@ -3,7 +3,7 @@ import * as enums from '../../useful/enums/Tarefa';
 
 type FilterState = {
 	term?: string;
-	criterion: 'priority' | 'status' | 'all';
+	criterion: 'prioridade' | 'status' | 'all';
 	value?: enums.Priority | enums.Status;
 };
 

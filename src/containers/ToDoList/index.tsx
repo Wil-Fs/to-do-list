@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Task from '../../components/Task';
-import { Container, Result } from './styles';
+import { MainContainer, Title } from '../../styles';
 
 import { RootReducer } from '../../store';
 
@@ -18,7 +18,7 @@ const ToDoList = () => {
 					item.title.toLowerCase().search(term.toLowerCase()) >= 0
 			);
 
-			if (criterion === 'priority') {
+			if (criterion === 'prioridade') {
 				filteredTasks = filteredTasks.filter(
 					(item) => item.priority === value
 				);
@@ -41,7 +41,7 @@ const ToDoList = () => {
 
 		if (criterion == 'all') {
 			message = `${quantity} tarefa(s) encontrada(s) como: ${
-				term != undefined && term.length > 0 ? `e "${term}"` : ''
+				term != undefined && term.length > 0 ? `e "${term}"` : 'todas'
 			}`;
 		} else {
 			message = `${quantity} tarefa(s) encontrada(s) como: "${`${criterion}=${value}`}" ${complement}`;
@@ -54,8 +54,8 @@ const ToDoList = () => {
 	const message = showResults(task.length);
 
 	return (
-		<Container>
-			<Result>{message}</Result>
+		<MainContainer>
+			<Title as="p">{message}</Title>
 			<ul>
 				{task.map(({ description, title, priority, status, id }) => (
 					<li key={title}>
@@ -69,7 +69,7 @@ const ToDoList = () => {
 					</li>
 				))}
 			</ul>
-		</Container>
+		</MainContainer>
 	);
 };
 

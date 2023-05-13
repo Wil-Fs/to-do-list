@@ -27,12 +27,18 @@ export const Card = styled.div`
 	padding: 16px;
 	margin-bottom: 32px;
 	border-radius: 16px;
+
+	label {
+		display: flex;
+		align-items: center;
+		margin-bottom: 16px;
+	}
 `;
 
 export const Title = styled.h3`
 	font-weight: bold;
 	font-size: 18px;
-	margin-bottom: 16px;
+	margin-left: 10px;
 `;
 
 export const Tags = styled.span<TagProps>`
@@ -74,10 +80,6 @@ export const Buttons = styled.button`
 	background-color: #2f3640;
 	border-radius: 8px;
 	margin-right: 8px;
-`;
-
-export const SaveButton = styled(Buttons)`
-	background-color: ${variables.green};
 `;
 
 export const RemoveCancelButton = styled(Buttons)`
